@@ -151,19 +151,7 @@ public class AntlrToLustre extends LustreBaseVisitor<Object> {
 
       ImportedComponentBuilder icb = new ImportedComponentBuilder(ctx.ID().getText());
 
-      // if realInputs is empty...
-      if (realInputs.isEmpty()) {
-        // that means we came accross --%REALIZABLE with no inputs specified, meaning all of
-        // the parameters are inputs
-        for (VarDeclGroupContext group : ctx.input.varDeclGroup()) {
-          for (TerminalNode input : group.ID()) {
-            icb.createVarInput(input.getText(), type(group.type()));
-          }
-        }
-      }
-      else {
-        // otherwise, only the variables specified by --%REALIZABLE are inputs and the rest are
-        // outputs
+      // the variables specified by --%REALIZABLE are inputs and the rest are outputs
       for (VarDeclGroupContext group : ctx.input.varDeclGroup()) {
         for (TerminalNode input : group.ID()) {
           if (realInputs.contains(input.getText())) {
@@ -173,7 +161,6 @@ public class AntlrToLustre extends LustreBaseVisitor<Object> {
           }
         }
       }
-    }
 
       Map<String, Type> locals = new HashMap<>();
 
