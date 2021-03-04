@@ -1,0 +1,25 @@
+plugins {
+  id 'antlr'
+  id 'application'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  antlr 'org.antlr:antlr4:4.9.1'
+  implementation 'edu.uiowa.cs.clc:kind2-java-api:0.2.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+}
+
+generateGrammarSource {
+    arguments += ['-visitor', '-package', 'edu.uiowa.cs.clc.translator']
+}
+
+test {
+  useJUnitPlatform()
+}
+
+mainClassName = "edu.uiowa.cs.clc.translator.Main"

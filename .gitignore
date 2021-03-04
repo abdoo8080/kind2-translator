@@ -1,0 +1,9 @@
+.antlr
+.casspass
+.gradle
+.project
+.settings
+.vscode
+bin
+build
+synthesis-benchmarks
